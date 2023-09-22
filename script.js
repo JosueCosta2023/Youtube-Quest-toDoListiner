@@ -58,7 +58,7 @@ const handleAddTask = () => {
 
     inputElement.value = "";
 
-    // updateLocalStorage();
+     updateLocalStorage();
 
 };
 
@@ -82,7 +82,7 @@ const handleAddTask = () => {
          }
      }
 
-    //  updateLocalStorage();
+      updateLocalStorage();
  }
 
  //ARROW-FUNCTION
@@ -96,7 +96,7 @@ const handleAddTask = () => {
         }
     }
 
-    // updateLocalStorage();
+     updateLocalStorage();
  }
 
 
@@ -113,51 +113,60 @@ const handleInputChange = () => {
     
 };
 
-// //Guardando os dados no localstorage
-// const updateLocalStorage = () =>{
-//     const tasks = tasksContainer.childNodes;
+ //Guardando os dados no localstorage
+ const updateLocalStorage = () =>{
+     const tasks = tasksContainer.childNodes;
 
-//     const localStorageTasks = [...tasks].map((task) => {
-//         const content = task.firstChild;
-//         const isCompleted = content.classList.contains("completed");
+     const localStorageTasks = [...tasks].map((task) => {
+         const content = task.firstChild;
+         const isCompleted = content.classList.contains('completed');
 
-//         return {description: content.innerText, isCompleted};
-//     });
+         return {description: content.innerText, isCompleted};
 
-//     localStorage.setItem('tasks', JSON.stringify(localStorageTasks));
-// };
+     });
+     console.log({localStorageTasks})
 
-// //Função para recarregar as tarefas
-// const refreshTasksUsingLocalStorage = () => {
+     localStorage.setItem('tasks', JSON.stringify(localStorageTasks));
+ };
 
-//     const tasksFromLocalStorage = JSON.parse(localStorage.getItem("tasks"));
+ //Função para recarregar as tarefas
+  const refreshTasksUsingLocalStorage = () => {
 
-//     if (!tasksFromLocalStorage) return;
+      const tasksFromLocalStorage = JSON.parse(localStorage.getItem("tasks"));
 
-//     for (const task of tasksFromLocalStorage) {
+      if (!tasksFromLocalStorage) return;
 
-//         const taskItemContainer = document.createElement('div');
-//         taskItemContainer.classList.add("task-item");
 
-//         const taskContent = document.createElement('p');
-//         taskContent.innerHTML = task.description;
+      for (const task of tasksFromLocalStorage) {
 
-//         if (task.isCompleted) {
-//             taskContent.classList.add("completed");
-//         };
+          const taskItemContainer = document.createElement('div');
+          taskItemContainer.classList.add("task-item");
 
-//         taskContent.addEventListener("click", () => handleClick(taskContent));
+          const taskContent = document.createElement('p');
+          taskContent.innerHTML = task.description;
 
-//         const deleteItem = document.createElement("i");
-//         deleteItem.classList.add("far");
-//         deleteItem.classList.add("fa-trash-alt");
+          if (task.isCompleted) {
+              taskContent.classList.add('completed');
+          };
 
-//         tasksContainer.appendChild(taskItemContainer);
+          taskContent.addEventListener("click", () => handleClick(taskContent));
 
-//     }
-// };
-// //Recarrega e tras os dados ja inseridos
-// refreshTasksUsingLocalStorage();
+          const deleteItem = document.createElement("i");
+          deleteItem.classList.add("far");
+          deleteItem.classList.add("fa-trash-alt");
+
+          deleteItem.addEventListener("click", () => handleDeleteClick(taskItemContainer, taskContent));
+
+          taskItemContainer.appendChild(taskContent);
+          taskItemContainer.appendChild(deleteItem)
+
+          tasksContainer.appendChild(taskItemContainer);
+
+      }
+  };
+
+ //Recarrega e tras os dados ja inseridos
+refreshTasksUsingLocalStorage();
 
 //Evento do botao, adicionar tarefa
 addTaskButton.addEventListener('click', () => handleAddTask());
