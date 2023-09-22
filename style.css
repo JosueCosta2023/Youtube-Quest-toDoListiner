@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2? family= Poppins:wght@400;500;700 & display=swap');
+/* @import url('https://fonts.googleapis.com/css2? family= Poppins:wght@400;500;700 & display=swap'); */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
 
 }
 
@@ -76,7 +76,10 @@ body{
     align-items: center;
     margin-bottom: 6px;
     margin-top: 6px;
+    cursor: pointer;
 }
+
+
 
 .task-item i{
     background-color: #41b883;
@@ -100,6 +103,7 @@ body{
     color: red;
 }
 
-.completes{
+.completed{
     text-decoration: line-through;
+    opacity: 0.5;
 }
